@@ -1,0 +1,69 @@
+﻿
+@model VidlyMaterialize.ViewModels.NewCustomerViewModel
+@{
+    ViewBag.Title = "Create new Customer";
+}
+
+<div class="container row">
+    <h2 class="header">@ViewBag.Title</h2>
+
+    <div class="row">
+        <div class="col s12">
+            @using (Html.BeginForm("Create", "Customers"))
+            {
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Insert customer data</span>
+                        <div class="row">
+                            <div class="input-field col s12 m4">
+                                @Html.LabelFor(m => m.Customer.FirstName, new { @class = "validate" })
+                                @Html.TextBoxFor(m => m.Customer.FirstName)
+                                @Html.ValidationMessageFor(m => m.Customer.FirstName)
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.LabelFor(m => m.Customer.LastName, new { @class = "validate" })
+                                @Html.TextBoxFor(m => m.Customer.LastName)
+                                @Html.ValidationMessageFor(m => m.Customer.LastName)
+                            </div>
+                            <div class="input-field col s12 m4">
+                                @Html.DropDownListFor(m => m.Customer.GenderId, new SelectList(Model.Genders, "Id", "Name")@*, new { @multiple = true }*@)
+                                @Html.LabelFor(m => m.Customer.GenderId)
+                                @Html.ValidationMessageFor(m => m.Customer.GenderId)
+                                @*<input name="Customer.GenderId" type="hidden" value="" />*@
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m6">
+                                @Html.LabelFor(m => m.Customer.Birthdate)
+                                @Html.TextBoxFor(m => m.Customer.Birthdate, "{0:d MMMM yyyy}", new { @class = "datepicker" })
+                            </div>
+                            <div class="input-field col s12 m6">
+                                <label>
+                                    <input name="Customer.IsSubscribedToNewsletter" type="checkbox" class="filled-in" checked="checked" value="true" />
+                                    <span>Subscribe to Newsletter</span>
+                                </label>
+                                <input name="Customer.IsSubscribedToNewsletter" type="hidden" value="false" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Save
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            M.FormSelect.init(document.querySelector('select'));
+            M.Datepicker.init(document.querySelector('.datepicker'));
+        });
+    </script>
+}
+

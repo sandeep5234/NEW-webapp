@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Applicazione ASP.NET</title>
+
+    @Styles.Render("~/Content/materialize")
+    @Styles.Render("~/Content/sidebar-fixed")
+    @Styles.Render("~/Content/nouislider")
+
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    @Html.Partial("_Navbar")
+
+    @Html.Partial("_Sidebar")
+
+    <div class="container-fluid body-content">
+        @RenderBody()
+    </div>
+
+    @Html.Partial("_Footer")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/materialize")
+    @Scripts.Render("~/bundles/nouislider")
+
+    <script>
+        var sidenav = document.querySelector('.sidenav');
+        var instance = M.Sidenav.init(sidenav);
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
